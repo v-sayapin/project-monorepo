@@ -1,0 +1,7 @@
+{
+	"extends": "@project-monorepo/ts-config/base",
+	"include": ["*.config.ts"],
+	"compilerOptions": {
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo"
+	}
+}
