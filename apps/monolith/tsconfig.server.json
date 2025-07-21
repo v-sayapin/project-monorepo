@@ -1,0 +1,19 @@
+{
+	"extends": "@project-monorepo/ts-config/server",
+	"include": ["src/server"],
+	"compilerOptions": {
+		"outDir": "dist/server",
+
+		"baseUrl": ".",
+		"paths": {
+			"src/server/*": ["src/server/*"]
+		},
+
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.server.tsbuildinfo",
+		"composite": true
+	},
+	"tsc-alias": {
+		"resolveFullPaths": true,
+		"verbose": true
+	}
+}

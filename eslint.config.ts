@@ -5,6 +5,7 @@ import jsEslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
+import solidPlugin from 'eslint-plugin-solid/configs/typescript';
 import globals from 'globals';
 import tsEslint from 'typescript-eslint';
 
@@ -39,6 +40,19 @@ const config = tsEslint.config(
 			],
 			'@typescript-eslint/no-namespace': ['error', { allowDeclarations: true, allowDefinitionFiles: true }],
 			'@typescript-eslint/prefer-function-type': 'error',
+		},
+	},
+	{
+		name: 'monolith-client',
+		files: ['apps/monolith/src/client/**/.{js,jsx,ts,tsx,d.ts}', 'apps/monolith/src/*.{jsx,tsx}'],
+		...solidPlugin,
+		languageOptions: {
+			ecmaVersion: 2022,
+			parser: tsEslint.parser,
+			parserOptions: {
+				project: 'apps/monolith/tsconfig.client.json',
+			},
+			globals: globals.browser,
 		},
 	},
 	tsEslint.configs.stylistic,
