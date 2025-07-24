@@ -4,6 +4,8 @@ import { includeIgnoreFile } from '@eslint/compat';
 import jsEslint from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier/recommended';
+import reactHooksPlugin from 'eslint-plugin-react-hooks';
+import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import simpleImportSortPlugin from 'eslint-plugin-simple-import-sort';
 import solidPlugin from 'eslint-plugin-solid/configs/typescript';
 import globals from 'globals';
@@ -43,9 +45,27 @@ const config = tsEslint.config(
 		},
 	},
 	{
-		name: 'monolith-client',
-		files: ['apps/monolith/src/client/**/.{js,jsx,ts,tsx,d.ts}', 'apps/monolith/src/*.{jsx,tsx}'],
+		name: 'solid-client',
+		files: [
+			'apps/monolith/src/client/**/.{js,jsx,ts,tsx,d.ts}',
+			'apps/monolith/src/*.{jsx,tsx}',
+			'apps/solid-mf/src/**/.{js,jsx,ts,tsx,d.ts}',
+			'apps/another-solid-mf/src/**/.{js,jsx,ts,tsx,d.ts}',
+		],
 		...solidPlugin,
+		languageOptions: {
+			ecmaVersion: 2022,
+			parser: tsEslint.parser,
+			parserOptions: {
+				project: 'apps/monolith/tsconfig.client.json',
+			},
+			globals: globals.browser,
+		},
+	},
+	{
+		name: 'react-client',
+		files: ['apps/react-mf/src/**/.{js,jsx,ts,tsx,d.ts}', 'apps/another-react-mf/src/**/.{js,jsx,ts,tsx,d.ts}'],
+		extends: [reactHooksPlugin.configs['recommended-latest'], reactRefreshPlugin.configs.vite],
 		languageOptions: {
 			ecmaVersion: 2022,
 			parser: tsEslint.parser,
