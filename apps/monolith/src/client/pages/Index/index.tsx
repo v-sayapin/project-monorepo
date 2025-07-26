@@ -1,22 +1,26 @@
-import type { Component } from 'solid-js';
-import { createSignal } from 'solid-js';
+import React from 'react';
+import { createSignal, onMount, Show } from 'solid-js';
+import { isServer } from 'solid-js/web';
 
 import { Nav } from 'src/client/components/Nav';
+import { ReactContainer } from 'src/client/components/ReactContainer';
 
-const IndexPage: Component = () => {
-	const [count, setCount] = createSignal(0);
+const IndexPage = () => {
+	const [FourthMfButtons, setFourthMfButtons] = createSignal<React.ComponentType | null>(null);
+
+	onMount(async () => {
+		if (isServer) {
+			return;
+		}
+		const module = await import('fourthMf/Buttons');
+		setFourthMfButtons(() => module.default.Buttons);
+	});
 
 	return (
 		<div>
 			<Nav />
 			Index page
-			<button
-				type='button'
-				onClick={() => {
-					setCount((prevState) => prevState + 1);
-				}}>
-				{count()}
-			</button>
+			<Show when={FourthMfButtons()}>{(Component) => <ReactContainer component={Component()} />}</Show>
 		</div>
 	);
 };
