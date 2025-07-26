@@ -1,5 +1,6 @@
 import { join, resolve } from 'node:path';
 
+import { portMap } from '@project-monorepo/env-config';
 import Fastify from 'fastify';
 
 import { registerFileBasedRoutes } from 'src/server/app/fileBasedRoutes';
@@ -56,7 +57,7 @@ const main = async () => {
 
 	app.setNotFoundHandler((_, reply) => reply.code(404).type('text/plain').send('Not found'));
 
-	await app.listen({ host: 'localhost', port: 2000 });
+	await app.listen({ host: 'localhost', port: portMap.monolith });
 };
 
 void main();

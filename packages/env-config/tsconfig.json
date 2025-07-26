@@ -1,0 +1,10 @@
+{
+	"extends": "@project-monorepo/ts-config/lib",
+	"include": ["src"],
+	"compilerOptions": {
+		"rootDir": "src",
+		"outDir": "lib",
+
+		"tsBuildInfoFile": "./node_modules/.tmp/tsconfig.tsbuildinfo"
+	}
+}

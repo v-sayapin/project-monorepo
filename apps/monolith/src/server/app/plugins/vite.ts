@@ -9,7 +9,7 @@ declare module 'fastify' {
 	// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 	interface FastifyInstance {
 		vite: ViteDevServer;
-		use: (fn: NextHandleFunction) => this;
+		use(fn: NextHandleFunction): this;
 	}
 }
 

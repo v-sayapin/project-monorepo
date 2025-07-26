@@ -1,0 +1,19 @@
+{
+	"name": "@project-monorepo/env-config",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"main": "lib/index.js",
+	"types": "lib/index.d.ts",
+	"scripts": {
+		"dev": "tsc -b",
+		"build": "tsc -b"
+	},
+	"dependencies": {
+		"dotenv": "^17.2.1"
+	},
+	"devDependencies": {
+		"@project-monorepo/ts-config": "workspace:*",
+		"typescript": "^5.8.3"
+	}
+}
